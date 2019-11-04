@@ -1,19 +1,12 @@
 const studentController = require('../controllers/student');
 const app = require('express');
-const mongoose = require('mongoose'); 
-const Student = require('../models/student')
 const studentRouter = app.Router();
+const jwt = require('express-jwt');
 
-studentRouter.get('/', async(req, res) => {
-    const students = await Student.find({}).exec();
-    res.send(students);
-});
-
-studentRouter.get('/:id', (req, res) => {
-    res.send("");
-});
-
+studentRouter.get("/:id",jwt({secret: process.env.SERVER_SECRET}),studentController.showInfo);
+studentRouter.get("/ID/:id",studentController.findByID)
 studentRouter.post('/', studentController.create);
+studentRouter.post('/login', studentController.login);
 studentRouter.put('/:id',studentController.update);
 studentRouter.delete('/:id', studentController.delete);
 
