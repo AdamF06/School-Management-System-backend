@@ -4,11 +4,11 @@ const validator = require('validator')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 
-const studentSchema = new Schema({
+const teacherSchema = new Schema({
     inentity:String,
     first_name: String,
     last_name: String,
-    student_ID: { type: String, unique: true },
+    teacher_ID: { type: String, unique: true },
     email: {
         type: String,
         validate: email => validator.isEmail(email),
@@ -33,8 +33,13 @@ const studentSchema = new Schema({
     course: [
         {
             course_ID: String,
-            paied: Number,            
         },
+    ],
+    student:[
+        {
+            student_ID:String,
+            course_ID:String
+        }
     ],
     assignment: [
         {
@@ -52,33 +57,31 @@ const studentSchema = new Schema({
     }
 })
 
-//save是事件名
-studentSchema.pre('save', async function (next) {
-    const student = this;
-    if (student.isModified('password')) {
-        student.password = await bcrypt.hash(student.password, 8)
+teacherSchema.pre('save', async function (next) {
+    const teacher = this;
+    if (teacher.isModified('password')) {
+        teacher.password = await bcrypt.hash(teacher.password, 8)
     }
     next()
 })
-
-studentSchema.statics.findByEmailPassword = async function (email, password) {
-    const student = await this.findOne({ email }).select('+password').exec()
-    if (!student) {
+teacherSchema.statics.findByEmailPassword = async function (email, password) {
+    const teacher = await this.findOne({ email }).select('+password').exec()
+    if (!teacher) {
         return;
     }
-    if (await bcrypt.compare(password, student.password)) {
-        return student;
+    if (await bcrypt.compare(password, teacher.password)) {
+        return teacher;
     }
 }
-
-studentSchema.methods.tokenGenerator = function () {
-    const student = this;
+teacherSchema.methods.tokenGenerator = function () {
+    const teacher = this;
     return jwt.sign({
-        student_ID:student.student_ID,
-        email: student.email,
-        first_name: student.first_name
+        teacher_ID:teacher.teacher_ID,
+        email: teacher.email,
+        first_name: teacher.first_name
     }, process.env.SERVER_SECRET)
 
 }
-module.exports = mongoose.model('Student', studentSchema)
+
+module.exports = mongoose.model('Teacher', teacherSchema)
 
