@@ -8,7 +8,11 @@ const teacherSchema = new Schema({
     inentity:String,
     first_name: String,
     last_name: String,
-    teacher_ID: { type: String, unique: true },
+    teacher_ID: { 
+        type: String, 
+        unique: true,
+        required:true, 
+    },
     email: {
         type: String,
         validate: email => validator.isEmail(email),
