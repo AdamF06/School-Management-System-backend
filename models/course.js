@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const courseSchema = new Schema({
-    course_ID = { type: String, unique: true },
+    course_ID : { type: String, unique: true },
     state: String,//on going, complete, on apply...
     name: String,
     course_code: String,
