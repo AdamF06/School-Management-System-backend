@@ -8,6 +8,15 @@ const studentRouter = require('./routes/student')
 const teacherRouter = require('./routes/teacher')
 const assignmentRouter = require('./routes/assignment')
 const courseRouter = require('./routes/course')
+//CORS
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Content-Type,Content-Length, Authorization, Accept,X-Requested-With");
+  res.header("Access-Control-Allow-Methods","PUT,POST,GET,DELETE,OPTIONS");
+  res.header("X-Powered-By",' 3.2.1')
+  next();
+});
+
 app.use("/students", studentRouter)
 app.use('/teachers', teacherRouter)
 app.use('/assignments',assignmentRouter)
