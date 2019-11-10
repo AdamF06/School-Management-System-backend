@@ -6,8 +6,12 @@ const bodyParser = require('body-parser')
 app.use(bodyParser.json())
 const studentRouter = require('./routes/student')
 const teacherRouter = require('./routes/teacher')
+const assignmentRouter = require('./routes/assignment')
+const courseRouter = require('./routes/course')
 app.use("/students", studentRouter)
 app.use('/teachers', teacherRouter)
+app.use('/assignments',assignmentRouter)
+app.use('/courses',courseRouter)
 
 
 
