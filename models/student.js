@@ -5,7 +5,7 @@ const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 
 const studentSchema = new Schema({
-    inentity:String,
+    identity:String,
     first_name: String,
     last_name: String,
     student_ID: { 
@@ -80,6 +80,7 @@ studentSchema.methods.tokenGenerator = function () {
     return jwt.sign({
         student_ID:student.student_ID,
         email: student.email,
+        identity:student.identity,
         first_name: student.first_name
     }, process.env.SERVER_SECRET)
 

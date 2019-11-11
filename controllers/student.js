@@ -39,7 +39,7 @@ const studentController = {
         if (!student) {
             res.sendStatus(status.UNAUTHORIZED)
         }
-        res.send({ token: student.tokenGenerator() });
+        res.status(200).send({ token: student.tokenGenerator() });
     },
     findByID: async (req, res) => {
     const { id } = req.params
