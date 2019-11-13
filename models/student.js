@@ -37,6 +37,7 @@ const studentSchema = new Schema({
     course: [
         {
             course_ID: String,
+            course_name:String,
             paied: Number,            
         },
     ],
@@ -78,6 +79,7 @@ studentSchema.statics.findByEmailPassword = async function (email, password) {
 studentSchema.methods.tokenGenerator = function () {
     const student = this;
     return jwt.sign({
+        _id: student.id,
         student_ID:student.student_ID,
         email: student.email,
         identity:student.identity,
