@@ -17,6 +17,7 @@ app.use(function(req, res, next) {
   next();
 });
 
+// app.use("/login", authRouter)
 app.use("/students", studentRouter)
 app.use('/teachers', teacherRouter)
 app.use('/assignments',assignmentRouter)
