@@ -45,6 +45,15 @@ const studentController = {
     const { id } = req.params
     const student = await Student.find({student_ID:id}).exec();
     res.status(201).send(student);
+    },
+    fetchCourse: async (req, res) =>{
+        const { id } = req.params
+        const student = await Student.findById(id).exec();
+        if(student){
+            res.status(201).send(student.course)
+        }else{
+            res.sendStatus(status.NOT_FOUND)
+        }
     }
 };
 
