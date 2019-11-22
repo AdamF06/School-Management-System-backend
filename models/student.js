@@ -8,7 +8,7 @@ const studentSchema = new Schema({
     identity:String,
     first_name: String,
     last_name: String,
-    student_ID: { 
+    student_ID: {
         type: String,
         unique: true,
         required:true,
@@ -38,7 +38,8 @@ const studentSchema = new Schema({
         {
             course_ID: String,
             course_name:String,
-            paied: Number,            
+            season:String,
+            paied: Number,
         },
     ],
     assignment: [
@@ -88,4 +89,3 @@ studentSchema.methods.tokenGenerator = function () {
 
 }
 module.exports = mongoose.model('Student', studentSchema)
-

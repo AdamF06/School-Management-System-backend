@@ -54,7 +54,7 @@ const studentController = {
         }else{
             res.sendStatus(status.NOT_FOUND)
         }
-    }
+    },
 };
 
 module.exports = studentController;
