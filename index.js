@@ -17,6 +17,8 @@ app.use(function(req, res, next) {
   next();
 });
 
+
+
 // app.use("/login", authRouter)
 app.use("/students", studentRouter)
 app.use('/teachers', teacherRouter)
@@ -25,7 +27,7 @@ app.use('/courses',courseRouter)
 
 
 
-mongoose.connect(process.env.MONGODB_URL, { useNewUrlParser: true, useCreateIndex: true, useFindAndModify: false });
+mongoose.connect(process.env.MONGODB_URL, { useNewUrlParser: true, useCreateIndex: true, useFindAndModify: false,useUnifiedTopology: true });
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function () {
