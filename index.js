@@ -29,7 +29,6 @@ app.use(bodyParser.json())
 
 const studentRouter = require('./routes/student')
 const teacherRouter = require('./routes/teacher')
-const assignmentRouter = require('./routes/assignment')
 const courseRouter = require('./routes/course')
 //CORS
 app.use(function (req, res, next) {
@@ -43,7 +42,6 @@ app.use(function (req, res, next) {
 // app.use("/login", authRouter)
 app.use("/students", studentRouter)
 app.use('/teachers', teacherRouter)
-app.use('/assignments', assignmentRouter)
 app.use('/courses', courseRouter)
 
 //'avatar 是前端传过来的key'

@@ -21,15 +21,10 @@ const studentSchema = new Schema({
         minlength: 6,
         required: true,
     },
-    mobile_number: {
-        type: Number,
-        validate: mobile_number => validator.isMobilePhone(mobile_number, ["en-AU", "zh-CN"])
-    },
+    mobile_number:Number,
     city: String,
-    address: [
-        { address_1: String },
-        { address_2: String }
-    ],
+    address_1: String,
+    address_2: String,
     title: String,
     introduction: String,
     school: String,
@@ -44,10 +39,16 @@ const studentSchema = new Schema({
     ],
     assignment: [
         {
-            assignment_ID: String,
+            name: String,
+            key: String,
         }
     ],
-
+    project: [
+        {
+            name: String,
+            key: String,
+        }
+    ],
     password:
     {
         type: String,
@@ -55,7 +56,8 @@ const studentSchema = new Schema({
         minlength: 6,
         maxlength: 32,
         select: false,
-    }
+    },
+    avatar:String
 })
 
 //save是事件名
@@ -86,6 +88,5 @@ studentSchema.methods.tokenGenerator = function () {
         identity:student.identity,
         first_name: student.first_name
     }, process.env.SERVER_SECRET)
-
 }
 module.exports = mongoose.model('Student', studentSchema)

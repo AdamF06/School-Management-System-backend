@@ -2,11 +2,9 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const courseSchema = new Schema({
-    course_ID : { type: String, unique: true },
+    course_ID: { type: String, unique: true },
     state: String,//on going, complete, on apply...
     name: String,
-    course_code: String,
-    number_of_students: Number,
     prerequest_knowledge: [
         { knowledge: String }
     ],
@@ -26,18 +24,39 @@ const courseSchema = new Schema({
         { address_2: String }
     ],
     thumbnall: Number,
-
+    module:[
+        {
+            No:Number,
+            module_name: String,
+            start_date: Date,
+            description: String,
+            key: String
+        }
+    ],
     assignment: [
-        { assignment_name: String }
-    ],//这个ass没有ID,每个学生的ass通过ass_ID查看
+        {
+            No:Number,
+            assignment_name: String,
+            start_date: Date,
+            end_date: Date,
+            marks: Number,
+            description: String,
+            key: String
+        }
+    ],
     project: [
         {
+            No:Number,
             project_name: String,
             start_date: Date,
             end_date: Date,
             marks: Number,
             description: String,
+            key: String
         }
+    ],
+    student:[
+        {id:String}
     ]
 })
 

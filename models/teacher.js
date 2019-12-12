@@ -58,7 +58,8 @@ const teacherSchema = new Schema({
         minlength: 6,
         maxlength: 32,
         select: false,
-    }
+    },
+    avatar:String
 })
 
 teacherSchema.pre('save', async function (next) {
