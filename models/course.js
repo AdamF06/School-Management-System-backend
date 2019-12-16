@@ -56,7 +56,11 @@ const courseSchema = new Schema({
         }
     ],
     student:[
-        {id:String}
+       {
+        student_ID:String,
+        first_name:String,
+        last_name:String
+       }
     ]
 })
 
