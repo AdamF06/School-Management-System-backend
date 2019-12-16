@@ -18,9 +18,8 @@ const upload = multer({
     s3: s3,
     bucket: 'teaching-management-system',
     key: function (req, file, cb) {
-      const {path} = req.body
-      console.log(path)
-      cb(null, path+'/'+Date.now().toString())
+      const {path,user,fileName} = req.body
+      cb(null, path+'/'+user+'-'+Date.now().toString()+'-'+fileName)
     }
   })
 })
@@ -52,7 +51,6 @@ app.post('/upload',upload.single('avatar'), (req, res) => {
 app.get('/download/:key',(req,res)=>{
   const {key} = req.params
   const {path} =req.query
-  console.log(path)
   const url = s3.getSignedUrl('getObject', {
     Bucket: 'teaching-management-system'+''+path,
     Key: key,
