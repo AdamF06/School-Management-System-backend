@@ -5,13 +5,13 @@ const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 
 const teacherSchema = new Schema({
-    identity:String,
+    identity: String,
     first_name: String,
     last_name: String,
-    teacher_ID: { 
-        type: String, 
+    teacher_ID: {
+        type: String,
         unique: true,
-        required:true, 
+        required: true,
     },
     email: {
         type: String,
@@ -21,15 +21,11 @@ const teacherSchema = new Schema({
         minlength: 6,
         required: true,
     },
-    mobile_number: {
-        type: Number,
-        validate: mobile_number => validator.isMobilePhone(mobile_number, ["en-AU", "zh-CN"])
-    },
     city: String,
-    address: [
-        { address_1: String },
-        { address_2: String }
-    ],
+    mobile_number: Number,
+    city: String,
+    address_1: String,
+    address_2: String,
     title: String,
     introduction: String,
     school: String,
@@ -37,18 +33,8 @@ const teacherSchema = new Schema({
     course: [
         {
             course_ID: String,
+            course_name: String
         },
-    ],
-    student:[
-        {
-            student_ID:String,
-            course_ID:String
-        }
-    ],
-    assignment: [
-        {
-            assignment_ID: String,
-        }
     ],
 
     password:
@@ -59,7 +45,7 @@ const teacherSchema = new Schema({
         maxlength: 32,
         select: false,
     },
-    avatar:String
+    avatar: String
 })
 
 teacherSchema.pre('save', async function (next) {
@@ -81,8 +67,8 @@ teacherSchema.statics.findByEmailPassword = async function (email, password) {
 teacherSchema.methods.tokenGenerator = function () {
     const teacher = this;
     return jwt.sign({
-        identity:teacher.identity,
-        teacher_ID:teacher.teacher_ID,
+        identity: teacher.identity,
+        teacher_ID: teacher.teacher_ID,
         email: teacher.email,
         first_name: teacher.first_name
     }, process.env.SERVER_SECRET)

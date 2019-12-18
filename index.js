@@ -45,7 +45,7 @@ app.use("/students", studentRouter)
 app.use('/teachers', teacherRouter)
 app.use('/courses', courseRouter)
 
-//'avatar 是前端传过来的key'
+//'avatar is the key'
 app.post('/upload',upload.single('avatar'), (req, res) => {
   res.send(req.file)
 })
@@ -61,7 +61,6 @@ app.get('/download/:key',(req,res)=>{
     Key: key,
     Expires: 300
 })
-//res.redirect(301,url)
   res.send({url})
 })
 

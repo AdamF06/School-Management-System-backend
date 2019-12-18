@@ -38,6 +38,7 @@ const teacherController = {
         }
         res.send({ token: teacher.tokenGenerator() });
     },
+
     showStudent: async (req,res)=>{
         const { id } = req.params
         const teacher = await Teacher.find({teacher_ID:id}).exec();
