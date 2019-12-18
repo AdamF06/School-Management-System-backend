@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 const courseSchema = new Schema({
     course_ID: { type: String, unique: true },
     state: String,//on going, complete, on apply...
-    name: String,
+    course_name: String,
     prerequest_knowledge: [
         { knowledge: String }
     ],
@@ -47,7 +47,7 @@ const courseSchema = new Schema({
     project: [
         {
             No:Number,
-            project_name: String,
+            assignment_name: String,
             start_date: Date,
             end_date: Date,
             marks: Number,

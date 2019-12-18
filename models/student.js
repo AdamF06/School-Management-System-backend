@@ -86,7 +86,8 @@ studentSchema.methods.tokenGenerator = function () {
         student_ID:student.student_ID,
         email: student.email,
         identity:student.identity,
-        first_name: student.first_name
+        first_name: student.first_name,
+        last_name:student.last_name
     }, process.env.SERVER_SECRET)
 }
 module.exports = mongoose.model('Student', studentSchema)

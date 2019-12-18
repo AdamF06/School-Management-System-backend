@@ -3,14 +3,15 @@ const express = require('express')
 const app = express()
 const mongoose = require('mongoose')
 const bodyParser = require('body-parser')
+const jwt = require('express-jwt');
 const multer = require('multer')
 const multerS3 = require('multer-s3')
 const aws = require('aws-sdk')
 
 const s3 = new aws.S3({
   region: 'ap-southeast-2',
-  accessKeyId: 'AKIAJ4544NPQF7W4TH6Q',
-  secretAccessKey: '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'
+  accessKeyId: 'AKIAJ3ONN4DANLYT3RVA',
+  secretAccessKey: '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'
 })
 
 const upload = multer({
@@ -19,6 +20,7 @@ const upload = multer({
     bucket: 'teaching-management-system',
     key: function (req, file, cb) {
       const {path,user,fileName} = req.body
+      console.log(path,user,fileName)
       cb(null, path+'/'+user+'-'+Date.now().toString()+'-'+fileName)
     }
   })
@@ -45,6 +47,9 @@ app.use('/courses', courseRouter)
 
 //'avatar 是前端传过来的key'
 app.post('/upload',upload.single('avatar'), (req, res) => {
+  res.send(req.file)
+})
+app.post('/upload/file',upload.single('files'), (req, res) => {
   res.send(req.file)
 })
 //give user download promission 
