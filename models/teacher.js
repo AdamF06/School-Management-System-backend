@@ -67,6 +67,7 @@ teacherSchema.statics.findByEmailPassword = async function (email, password) {
 teacherSchema.methods.tokenGenerator = function () {
     const teacher = this;
     return jwt.sign({
+        _id: teacher.id,
         identity: teacher.identity,
         teacher_ID: teacher.teacher_ID,
         email: teacher.email,

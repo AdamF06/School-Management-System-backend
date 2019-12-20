@@ -41,12 +41,14 @@ const studentSchema = new Schema({
         {
             name: String,
             key: String,
+            mark:String
         }
     ],
     project: [
         {
             name: String,
             key: String,
+            mark:String
         }
     ],
     password:

@@ -5,7 +5,7 @@ const { errorHandler } = require('../tools/helpers')
 const teacherController = {
     showInfo: async (req, res) => {
         const { id } = req.params
-        const teacher = await Teacher.find({teacher_ID:id}).exec();
+        const teacher = await Teacher.findById(id).exec();
         
         if (teacher) {
             res.status(201).send(teacher);
